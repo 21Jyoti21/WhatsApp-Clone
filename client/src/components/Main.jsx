@@ -173,9 +173,41 @@ function Main() {
           onlineUsers,
         });
       });
+
       setSocketEvent(true);
     }
   }, [socket.current]);
+  useEffect(() => {
+    if (!socket.current) return;
+    const handleMsgReceive = (message) => {
+      const isMessageForOpenChat =
+        currentChatUser &&
+        message.senderId === currentChatUser.id &&
+        message.recieverId === userInfo.id;
+
+      if (isMessageForOpenChat) {
+        dispatch({
+          type: reducerCases.ADD_MESSAGE,
+          newMessage: {
+            ...message,
+            fromSelf: false,
+          },
+        });
+      }
+
+      dispatch({
+        type: reducerCases.UPDATE_CONTACT_LAST_MESSAGE,
+        payload: {
+          contactId: message.senderId,
+          message,
+        },
+      });
+    };
+    socket.current.on("msg-recieve", handleMsgReceive);
+    return () => {
+      socket.current.off("msg-recieve", handleMsgReceive);
+    };
+  }, [socket.current, currentChatUser, userInfo, dispatch]);
   useEffect(() => {
     if (!userInfo || !currentChatUser) {
       console.log(

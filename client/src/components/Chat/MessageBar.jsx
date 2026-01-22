@@ -123,6 +123,7 @@ function MessageBar() {
       return;
     }
 
+    
     const messageId = Date.now();
     const socketMessage = {
       id: messageId,

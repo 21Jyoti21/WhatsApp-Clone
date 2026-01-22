@@ -35,37 +35,6 @@ function ChatContainer() {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
-
-  useEffect(() => {
-    if (!socket || typeof socket.on !== "function") return;
-    const handleReceiveMessage = (payload) => {
-      const message = payload?.message ?? payload;
-
-      if (!message || !message.id) {
-        console.error("Invalid message received:", payload);
-        return;
-      }
-      dispatch({
-        type: reducerCases.ADD_MESSAGE,
-        newMessage: message,
-      });
-      if (!message.senderId) {
-        console.error("[ChatContainer] message.senderId is missing!", message);
-        return;
-      }
-      dispatch({
-        type: reducerCases.UPDATE_CONTACT_LAST_MESSAGE,
-        payload: {
-          contactId: message.senderId,
-          message,
-        },
-      });
-    };
-    socket.on("msg-recieve", handleReceiveMessage);
-    return () => {
-      socket.off("msg-recieve", handleReceiveMessage);
-    };
-  }, [socket, dispatch]);
   if (!currentChatUser) {
     return null;
   }
