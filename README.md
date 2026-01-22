@@ -19,8 +19,9 @@ It supports **real-time messaging, voice/video calls, media sharing, and online 
 ## 🎥 Demo Recording
 
 👉 **Screen recording of the app (chat, calls, realtime communication):**  
-_(Attach the video here – see instructions below)_
-
+[_(Attach the video here – see instructions below)_
+]
+(https://www.youtube.com/watch?v=GRHg-eN2HmI)
 ---
 
 ## ✨ Features
