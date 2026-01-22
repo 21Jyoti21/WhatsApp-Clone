@@ -8,6 +8,7 @@ import { Server } from "socket.io";
 
 dotenv.config();
 const app = express();
+app.set("trust proxy", 1);
 
 const allowedOrigins = [
   "http://localhost:3000",
@@ -55,6 +56,9 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
     credentials: true,
   },
+  transports: ["websocket", "polling"],
+  pingTimeout: 60000,
+  pingInterval: 25000,
 });
 
 
