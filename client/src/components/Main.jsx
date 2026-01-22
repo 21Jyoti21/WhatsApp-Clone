@@ -136,6 +136,9 @@ function Main() {
       socket.current = io(HOST, {
   transports: ["websocket"],
   secure: true,
+        reconnection: true,
+  reconnectionAttempts: Infinity,
+  reconnectionDelay: 1000,
 });
 
       socket.current.emit("add-user", userInfo.id);
