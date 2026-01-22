@@ -132,7 +132,12 @@ function Main() {
 
   useEffect(() => {
     if (userInfo) {
-      socket.current = io(HOST);
+      // socket.current = io(HOST);
+      socket.current = io(HOST, {
+  transports: ["websocket"],
+  secure: true,
+});
+
       socket.current.emit("add-user", userInfo.id);
       dispatch({
         type: reducerCases.SET_SOCKET,
