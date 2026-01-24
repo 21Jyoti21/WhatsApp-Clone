@@ -3,9 +3,8 @@
 A full-stack WhatsApp-like real-time chat application built with **Next.js, React, Node.js, Express, Socket.IO, Prisma, and PostgreSQL**.  
 It supports **real-time messaging, voice/video calls, media sharing, and online status**.
 
-![WhatsApp Clone Demo](client/public/whatsapp.gif)
 <p align="center">
-  <img src="./client/public/whatsapp.gif" alt="WhatsApp Clone Demo" width="300" />
+  <img src="./client/public/whatsapp.gif" alt="WhatsApp Clone Demo" />
 </p>
 
 
