@@ -21,6 +21,34 @@ It supports **real-time messaging, voice/video calls, media sharing, and online 
 
 ---
 
+## ⚠️ Deployment Limitation (Important Note)
+
+This project uses **Socket.IO** for real-time messaging and calls.
+
+Since the application is deployed using:
+- **Frontend:** Vercel (serverless)
+- **Backend:** Render (free tier)
+
+there are known limitations:
+
+- ❌ WebSocket connections may disconnect or require refresh
+- ❌ Real-time messages may not appear instantly
+- ❌ Voice/Video calls may fail intermittently
+
+### ✅ Reason
+- Vercel uses **serverless functions**, which do not maintain persistent WebSocket connections.
+- Render free tier spins down inactive services, breaking socket sessions.
+
+### 🛠️ Recommended Production Setup
+For full real-time stability:
+- Deploy backend on **AWS EC2 / DigitalOcean / Railway**
+- Use **NGINX + PM2**
+- Or use **Socket.IO + Redis Adapter**
+
+📌 **All real-time features work correctly in local development.**
+
+---
+
 ## 🎥 Demo Recording
 
 👉 **Screen recording of the app (chat, calls, realtime communication):**  
