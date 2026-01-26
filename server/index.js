@@ -12,7 +12,7 @@ app.set("trust proxy", 1);
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://whats-app-clone-eosin.vercel.app" // 👈 your Vercel domain
+  "https://whats-app-clone-eosin.vercel.app"
 ];
 
 app.use(
@@ -42,11 +42,6 @@ const server = app.listen(process.env.PORT, () => {
   console.log(`Server started on port ${process.env.PORT}`);
 });
 
-// const io = new Server(server, {
-//   cors: {
-//     origin: "http://localhost:3000",
-//   },
-// });
 const io = new Server(server, {
   cors: {
     origin: [
@@ -65,7 +60,6 @@ const io = new Server(server, {
 global.onlineUsers = new Map();
 
 io.on("connection", (socket) => {
-  // global.chatSocket = socket;
 
   socket.on("add-user", (userId) => {
     onlineUsers.set(String(userId), socket.id);
@@ -142,33 +136,6 @@ io.on("connection", (socket) => {
     }
   });
 
-  // socket.on("send-msg", (data) => {
-
-  //   if (!data || !data.to || !data.from || !data.message) {
-  //     console.error("[Server] Invalid send-msg data:", data);
-  //     return;
-  //   }
-
-  //   if (data.to === data.from) {
-  //     console.warn("[Server] Ignoring socket send to self");
-  //     return;
-  //   }
-
-  //   const sendUserSocket = onlineUsers.get(String(data.to));
-
-  //   if (sendUserSocket) {
-  //     const messagePayload = {
-  //       message: {
-  //         ...data.message,
-  //         senderId: data.from,
-  //         recieverId: data.to,
-  //       }
-  //     };
-  //     socket.to(sendUserSocket).emit("msg-recieve", messagePayload);
-  //   } else {
-  //     console.warn("[Server] Receiver offline or not found");
-  //   }
-  // });
   socket.on("disconnect", () => {
     for (const [userId, socketId] of onlineUsers.entries()) {
       if (socketId === socket.id) {
