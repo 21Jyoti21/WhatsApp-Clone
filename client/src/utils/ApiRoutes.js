@@ -1,4 +1,3 @@
-// ✅ NEVER hardcode localhost here
 export const HOST = process.env.NEXT_PUBLIC_HOST;
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
